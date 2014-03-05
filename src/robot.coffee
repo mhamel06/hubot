@@ -59,6 +59,7 @@ class Robot
 
     @loadAdapter adapterPath, adapter
 
+    @adapterName   = adapter
     @errorHandlers = []
 
     @on 'error', (err, msg) =>
