@@ -20,6 +20,9 @@ class Response
   # Returns nothing.
   send: (strings...) ->
     @robot.adapter.send @envelope, strings...
+    if(@match.length > 1)
+      @robot.logMessage({envelope:@envelope, strings: strings, match: @match[1]})
+
 
   # Public: Posts an emote back to the chat source
   #

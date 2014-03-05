@@ -48,6 +48,7 @@ class Robot
     @commands  = []
     @listeners = []
     @logger    = new Log process.env.HUBOT_LOG_LEVEL or 'info'
+    @messageLogUrl = process.env.HUBOT_MESSAGE_LOG_URL or null
 
     @parseVersion()
     if httpd
@@ -481,5 +482,12 @@ class Robot
   http: (url) ->
     HttpClient.create(url)
       .header('User-Agent', "Hubot/#{@version}")
+
+  logMessage: (message) ->
+    if(@messageLogUrl)
+      message = JSON.stringify(message)
+      @http(@messageLogUrl).post(message) (err, res, body) ->
+        if(err) 
+          console.log(err) 
 
 module.exports = Robot
