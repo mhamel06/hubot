@@ -21,7 +21,7 @@ class Response
   send: (strings...) ->
     @robot.adapter.send @envelope, strings...
     if(@match.length > 1)
-      @robot.logMessage({envelope:@envelope, strings: strings, match: @match[1]})
+      @robot.logMessage({envelope:@envelope, strings: strings, match: @match[1], time: new Date()})
 
 
   # Public: Posts an emote back to the chat source
